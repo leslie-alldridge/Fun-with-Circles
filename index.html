@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Circles</title>
+	<script type="text/javascript" src="paper-full.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/1.1.28/howler.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+	<script type="text/paperscript" canvas="canvas">
+        var myPath;
+        var rad = 0;
+        var colorFill = 0;
+        var colorStore;
+        var x = 0;
+        var y = 0;
+
+function colorGenerator(){
+    colorFill = Math.floor(Math.random() * (10 - 2 + 1) ) + 2;
+    console.log(colorFill);
+    if (colorFill == 10){
+        colorStore = "green";
+        console.log(colorStore);
+    }
+    else if(colorFill == 9){
+        colorStore = "red";
+        console.log(colorStore);
+    }
+    else if(colorFill == 8){
+        colorStore = "black";
+    }
+    else if(colorFill == 7){
+        colorStore = "orange";
+    }
+    else if(colorFill == 6){
+        colorStore = "purple";
+    }
+    
+}        
+
+function onMouseDown(event) {
+    colorGenerator();
+	myPath = new Path();
+    rad = Math.floor(Math.random() * (100 - 10 + 1) ) + 10;
+    x = Math.floor(Math.random() * (800 - 10 + 1) ) + 10;
+    y = Math.floor(Math.random() * (600 - 10 + 1) ) + 10;
+}
+
+function onMouseUp(event) {
+    
+	var myCircle = new Path.Circle(new Point(x, y), rad);
+    console.log(rad);
+    console.log(x);
+    console.log(y);
+	myCircle.strokeColor = 'white';
+    myCircle.fillColor = colorStore;
+    
+}
+
+
+
+
+</script><canvas id="canvas"></canvas>
+
+
+
+
+
+
+
+
+</head>
+<body>
+    <canvas id="canvas" resize></canvas>
+</body>
+</html>
