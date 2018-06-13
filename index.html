@@ -16,8 +16,20 @@
         var circleArray = [];
         var colorArray = [];
         var numb = 0;
-
+        var h = screen.height;
+        var w = screen.width;
+        var total = 0;
         
+console.log(h);
+console.log(w);
+
+var text = new PointText(new Point(200, 50));
+text.justification = 'center';
+text.fillColor = 'white';
+
+function updateScore(){
+text.content = 'Circles Cleared: ' + total;
+}
 
 function colorGenerator(){
     colorFill = Math.floor(Math.random() * (10 - 2 + 1) ) + 2;
@@ -59,11 +71,13 @@ function onMouseDrag(event) {
     colorGenerator();
 	myPath = new Path();
     rad = Math.floor(Math.random() * (100 - 10 + 1) ) + 10;
+
 // if there's a way to grab page width and height that would help this run better 
 // instead of using a random 1400 or 600 range for circles to be drawn
+// done but need to test on other computers!
 
-    x = Math.floor(Math.random() * (1400 - 10 + 1) ) + 10;
-    y = Math.floor(Math.random() * (600 - 10 + 1) ) + 10;
+    x = Math.floor(Math.random() * (w - 10 + 1) ) + 10;
+    y = Math.floor(Math.random() * (h - 10 + 1) ) + 10;
 	var myCircle = new Path.Circle(new Point(x, y), rad);
     console.log(rad);
     console.log(x);
@@ -78,7 +92,9 @@ function onMouseDrag(event) {
 
 function removeCircle(){
         console.log(circleArray[numb]);
-        circleArray[numb].remove();     
+        circleArray[numb].remove();
+        total ++;   
+        updateScore();  
 }
 
 function onKeyDown(event) {
@@ -187,6 +203,7 @@ function onKeyDown(event) {
 </script><canvas id="canvas"></canvas>
 </head>
 <body>
+   
     <canvas id="canvas" resize="true"></canvas>
 </body>
 </html>
