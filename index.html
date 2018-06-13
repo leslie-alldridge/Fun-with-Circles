@@ -13,6 +13,8 @@
         var colorStore;
         var x = 0;
         var y = 0;
+        var circleArray = [];
+        var colorArray = [];
 
 function colorGenerator(){
     colorFill = Math.floor(Math.random() * (10 - 2 + 1) ) + 2;
@@ -37,25 +39,64 @@ function colorGenerator(){
     
 }        
 
-function onMouseDown(event) {
+tool.minDistance = 100;  
+
+function onMouseDrag(event) {
     colorGenerator();
 	myPath = new Path();
     rad = Math.floor(Math.random() * (100 - 10 + 1) ) + 10;
     x = Math.floor(Math.random() * (800 - 10 + 1) ) + 10;
     y = Math.floor(Math.random() * (600 - 10 + 1) ) + 10;
-}
-
-function onMouseUp(event) {
-    
 	var myCircle = new Path.Circle(new Point(x, y), rad);
     console.log(rad);
     console.log(x);
     console.log(y);
 	myCircle.strokeColor = 'white';
     myCircle.fillColor = colorStore;
-    
+    circleArray.push(myCircle);
+    colorArray.push(colorStore);
 }
 
+
+function onKeyDown(event) {
+    var path = new Path();
+
+
+	if(event.key == 'a') {
+		console.log(colorArray[1]);
+        if(colorArray[1] == "orange"){
+            console.log("orange!");
+        }
+	}
+
+	if(event.key == 'd') {
+		console.log(colorArray[1]);
+        if(colorArray[1] == "black"){
+            console.log("black!");
+        }
+	}
+
+	if(event.key == 'w') {
+        console.log(colorArray[1]);
+        if(colorArray[1] == "purple"){
+            console.log("purple!");
+        }
+	}
+
+	if(event.key == 's') {
+		console.log(colorArray[1]);
+        if(colorArray[1] == "red"){
+            console.log("red!");
+        }
+	}
+    
+    if(event.key == 'g') {
+		console.log(colorArray[1]);
+        if(colorArray[1] == "green"){
+            console.log("green!");
+        }
+	}
+}
 
 
 
