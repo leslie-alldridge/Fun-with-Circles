@@ -26,6 +26,15 @@ text.fillColor = 'white';
 text.strokeColor ='#00ffff';
 text.fontSize = 35;
 
+var title = new PointText(new Point(100, 50));
+title.justification = 'left';
+title.fillColor = 'white';
+title.strokeColor ='#00ffff';
+title.fontSize = 35;
+
+title.content = 'Click & drag mouse to begin. Press spacebar for instructions!';
+
+
 function circleDimension(){
     rad = Math.floor(Math.random() * (100 - 10 + 1) ) + 10;
     x = Math.floor(Math.random() * (w - 10 + 1) ) + 10;
@@ -70,7 +79,8 @@ function colorGenerator(){
 
 tool.minDistance = 80;  
 
-function onMouseDrag(event) {
+function onMouseDrag(event) {  
+    title.opacity = 0;
     colorGenerator();
     myPath = new Path();
     circleDimension();
