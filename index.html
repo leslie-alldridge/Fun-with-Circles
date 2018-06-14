@@ -91,7 +91,14 @@ function onMouseDrag(event) {
     colorArray.push(colorStore);
 }
 
-
+function onFrame(event){
+    for(var i = 0; i < circleArray.length; i++){
+      circleArray[i].scale(0.995);
+      if(circleArray[i].area < 80){
+          circleArray[i].remove();
+      }
+    }
+}
 
 function removeCircle(){
         console.log(circleArray[numb]);
