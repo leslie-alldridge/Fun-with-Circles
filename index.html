@@ -32,8 +32,10 @@ text.strokeColor ='#00ffff';
 text.fontSize = 35;
 
 
+
 function updateScore(){
-	text.content = 'Circles Cleared: ' + total;
+    text.content = 'Circles Cleared: ' + total;
+    text.bringToFront();
 	}
 
 function colorGenerator(){
@@ -76,16 +78,14 @@ function onMouseDrag(event) {
     colorGenerator();
 	myPath = new Path();
     rad = Math.floor(Math.random() * (100 - 10 + 1) ) + 10;
-
-
-
     x = Math.floor(Math.random() * (w - 10 + 1) ) + 10;
     y = Math.floor(Math.random() * (h - 10 + 1) ) + 10;
 	var myCircle = new Path.Circle(new Point(x, y), rad);
     console.log(rad);
     console.log(x);
     console.log(y);
-	myCircle.strokeColor = 'white';
+    myCircle.strokeColor = 'white';
+    myCircle.strokeWidth = 5;
     myCircle.fillColor = colorStore;
     circleArray.push(myCircle);
     colorArray.push(colorStore);
@@ -95,9 +95,12 @@ function onMouseDrag(event) {
 
 function removeCircle(){
         console.log(circleArray[numb]);
-        circleArray[numb].remove();
-          total ++;
-          updateScore();
+        var visible = circleArray[numb].remove();
+        if (visible == true){
+            total ++;
+            updateScore();
+        }
+        
 }
 
 function onKeyDown(event) {
