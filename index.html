@@ -19,11 +19,6 @@
         var h = screen.height;
         var w = screen.width;
         var total = 0;
-       
-        
-        
-console.log(h);
-console.log(w);
 
 var text = new PointText(new Point(200, 50));
 text.justification = 'center';
@@ -31,7 +26,11 @@ text.fillColor = 'white';
 text.strokeColor ='#00ffff';
 text.fontSize = 35;
 
-
+function circleDimension(){
+    rad = Math.floor(Math.random() * (100 - 10 + 1) ) + 10;
+    x = Math.floor(Math.random() * (w - 10 + 1) ) + 10;
+    y = Math.floor(Math.random() * (h - 10 + 1) ) + 10;
+}
 
 function updateScore(){
     text.content = 'Circles Cleared: ' + total;
@@ -40,14 +39,11 @@ function updateScore(){
 
 function colorGenerator(){
     colorFill = Math.floor(Math.random() * (10 - 2 + 1) ) + 2;
-    console.log(colorFill);
     if (colorFill == 10){
         colorStore = "green";
-        console.log(colorStore);
     }
     else if(colorFill == 9){
         colorStore = "red";
-        console.log(colorStore);
     }
     else if(colorFill == 8){
         colorStore = "white";
@@ -72,19 +68,19 @@ function colorGenerator(){
     }
 }        
 
-tool.minDistance = 100;  
+tool.minDistance = 80;  
 
 function onMouseDrag(event) {
     colorGenerator();
-	myPath = new Path();
-    rad = Math.floor(Math.random() * (100 - 10 + 1) ) + 10;
-    x = Math.floor(Math.random() * (w - 10 + 1) ) + 10;
-    y = Math.floor(Math.random() * (h - 10 + 1) ) + 10;
-	var myCircle = new Path.Circle(new Point(x, y), rad);
-    console.log(rad);
-    console.log(x);
-    console.log(y);
-    myCircle.strokeColor = 'white';
+    myPath = new Path();
+    circleDimension();
+    var myCircle = new Path.Circle(new Point(x, y), rad);
+        if (colorStore == "white"){
+            myCircle.strokeColor = 'blue';  
+        }
+        else {
+        myCircle.strokeColor = 'white';
+        }
     myCircle.strokeWidth = 5;
     myCircle.fillColor = colorStore;
     circleArray.push(myCircle);
@@ -101,13 +97,11 @@ function onFrame(event){
 }
 
 function removeCircle(){
-        console.log(circleArray[numb]);
         var visible = circleArray[numb].remove();
         if (visible == true){
             total ++;
             updateScore();
-        }
-        
+        }   
 }
 
 function onKeyDown(event) {
@@ -117,24 +111,20 @@ function onKeyDown(event) {
         
         for (var n = 0; n < circleArray.length; n++){
         if(colorArray[n] == "orange"){
-            console.log(colorArray[n]);
-            console.log("orange!");
             numb = n;
         	removeCircle();
-
-
+            }
         }
     }
-}
+
+    if(event.key == 'space') {
+        alert(" k = pink \n p = purple \n w = white \n b = blue \n n = brown \n g = green \n o = orange \n r = red \n y = yellow");
+    }
 
 	if(event.key == 'w') {
         for (var n = 0; n < circleArray.length; n++){
             if(colorArray[n] == "white"){
-                console.log(colorArray[n]);
-                console.log("white!");
                 numb = n;
-                
-        
                 removeCircle();
             }
         }
@@ -143,8 +133,6 @@ function onKeyDown(event) {
 	if(event.key == 'r') {
         for (var n = 0; n < circleArray.length; n++){
             if(colorArray[n] == "red"){
-                console.log(colorArray[n]);
-                console.log("red!");
                 numb = n;
                 removeCircle();
             }
@@ -154,8 +142,6 @@ function onKeyDown(event) {
 	if(event.key == 'p') {
         for (var n = 0; n < circleArray.length; n++){
             if(colorArray[n] == "purple"){
-                console.log(colorArray[n]);
-                console.log("purple!");
                 numb = n;
                 removeCircle();
             }
@@ -165,8 +151,6 @@ function onKeyDown(event) {
     if(event.key == 'g') {
         for (var n = 0; n < circleArray.length; n++){
             if(colorArray[n] == "green"){
-                console.log(colorArray[n]);
-                console.log("green!");
                 numb = n;
                 removeCircle();
             }
@@ -176,8 +160,6 @@ function onKeyDown(event) {
     if(event.key == 'k') {
         for (var n = 0; n < circleArray.length; n++){
             if(colorArray[n] == "pink"){
-                console.log(colorArray[n]);
-                console.log("pink!");
                 numb = n;
                 removeCircle();
             }
@@ -187,8 +169,6 @@ function onKeyDown(event) {
     if(event.key == 'n') {
         for (var n = 0; n < circleArray.length; n++){
             if(colorArray[n] == "brown"){
-                console.log(colorArray[n]);
-                console.log("brown!");
                 numb = n;
                 removeCircle();
             }
@@ -198,8 +178,6 @@ function onKeyDown(event) {
     if(event.key == 'b') {
         for (var n = 0; n < circleArray.length; n++){
             if(colorArray[n] == "blue"){
-                console.log(colorArray[n]);
-                console.log("blue!");
                 numb = n;
                 removeCircle();
             }
@@ -209,8 +187,6 @@ function onKeyDown(event) {
     if(event.key == 'y') {
         for (var n = 0; n < circleArray.length; n++){
             if(colorArray[n] == "yellow"){
-                console.log(colorArray[n]);
-                console.log("yellow!");
                 numb = n;
                 removeCircle();
             }
