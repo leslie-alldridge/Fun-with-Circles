@@ -3,7 +3,7 @@
 <head>
 	<title>Fun With Circles</title>
 	<script type="text/javascript" src="paper-full.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/1.1.28/howler.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.12/howler.core.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 
 	<script type="text/paperscript" canvas="canvas">
@@ -31,9 +31,7 @@ title.justification = 'left';
 title.fillColor = 'white';
 title.strokeColor ='#00ffff';
 title.fontSize = 35;
-
 title.content = 'Click & drag mouse to begin. Press spacebar for instructions!';
-
 
 function circleDimension(){
     rad = Math.floor(Math.random() * (100 - 10 + 1) ) + 10;
@@ -49,31 +47,31 @@ function updateScore(){
 function colorGenerator(){
     colorFill = Math.floor(Math.random() * (10 - 2 + 1) ) + 2;
     if (colorFill == 10){
-        colorStore = "green";
+        colorStore = "#63D153";
     }
     else if(colorFill == 9){
-        colorStore = "red";
+        colorStore = "#E4002B";
     }
     else if(colorFill == 8){
         colorStore = "white";
     }
     else if(colorFill == 7){
-        colorStore = "orange";
+        colorStore = "#EC7B26";
     }
     else if(colorFill == 6){
-        colorStore = "purple";
+        colorStore = "#9B26B6";
     }
     else if(colorFill == 5){
         colorStore = "blue";
     }
     else if(colorFill == 4){
-        colorStore = "yellow";
+        colorStore = "#FFE001";
     }
     else if(colorFill == 3){
-        colorStore = "brown";
+        colorStore = "#3A200E";
     }
     else if(colorFill == 2){
-        colorStore = "pink";
+        colorStore = "#FD71E8";
     }
 }        
 
@@ -102,7 +100,7 @@ function onFrame(event){
       circleArray[i].scale(0.995);
       if(circleArray[i].area < 80){
           circleArray[i].remove();
-      }
+        }
     }
 }
 
@@ -111,26 +109,36 @@ function removeCircle(){
         if (visible == true){
             total ++;
             updateScore();
-        }   
+            var sound = new Howl({
+                src: ['sounds/sound.mp3'],
+                volume: 0.5
+            });
+              sound.play();
+                if(total > 100){
+                  text.strokeColor = 'red';
+                }
+              if(total > 200){
+                  text.strokeColor = 'orange';
+                  text.fillColor = 'red';
+        }
+    }   
+        
 }
 
 function onKeyDown(event) {
     var path = new Path();
-
+    if(event.key == 'space') {
+        alert(" k = pink \n p = purple \n w = white \n b = blue \n n = brown \n g = green \n o = orange \n r = red \n y = yellow");
+    }
 	if(event.key == 'o') {
         
         for (var n = 0; n < circleArray.length; n++){
-        if(colorArray[n] == "orange"){
+        if(colorArray[n] == "#EC7B26"){
             numb = n;
         	removeCircle();
             }
         }
     }
-
-    if(event.key == 'space') {
-        alert(" k = pink \n p = purple \n w = white \n b = blue \n n = brown \n g = green \n o = orange \n r = red \n y = yellow");
-    }
-
 	if(event.key == 'w') {
         for (var n = 0; n < circleArray.length; n++){
             if(colorArray[n] == "white"){
@@ -139,46 +147,41 @@ function onKeyDown(event) {
             }
         }
     }
-
 	if(event.key == 'r') {
         for (var n = 0; n < circleArray.length; n++){
-            if(colorArray[n] == "red"){
+            if(colorArray[n] == "#E4002B"){
                 numb = n;
                 removeCircle();
             }
         }
     }
-
 	if(event.key == 'p') {
         for (var n = 0; n < circleArray.length; n++){
-            if(colorArray[n] == "purple"){
+            if(colorArray[n] == "#9B26B6"){
                 numb = n;
                 removeCircle();
             }
         }
     }
-    
     if(event.key == 'g') {
         for (var n = 0; n < circleArray.length; n++){
-            if(colorArray[n] == "green"){
+            if(colorArray[n] == "#63D153"){
                 numb = n;
                 removeCircle();
             }
         }
     }
-
     if(event.key == 'k') {
         for (var n = 0; n < circleArray.length; n++){
-            if(colorArray[n] == "pink"){
+            if(colorArray[n] == "#FD71E8"){
                 numb = n;
                 removeCircle();
             }
         }
     }
-
     if(event.key == 'n') {
         for (var n = 0; n < circleArray.length; n++){
-            if(colorArray[n] == "brown"){
+            if(colorArray[n] == "#3A200E"){
                 numb = n;
                 removeCircle();
             }
@@ -193,10 +196,9 @@ function onKeyDown(event) {
             }
         }
     }
-
     if(event.key == 'y') {
         for (var n = 0; n < circleArray.length; n++){
-            if(colorArray[n] == "yellow"){
+            if(colorArray[n] == "#FFE001"){
                 numb = n;
                 removeCircle();
             }
